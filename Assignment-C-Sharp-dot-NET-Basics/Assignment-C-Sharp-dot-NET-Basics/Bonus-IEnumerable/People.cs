@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment_C_Sharp_dot_NET_Basics.IEnumerable
+namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 {
 	public class People : IEnumerable<Person>
 	{
@@ -20,7 +20,7 @@ namespace Assignment_C_Sharp_dot_NET_Basics.IEnumerable
             }
         }
 
-		public IEnumerator<Person> GetEnumerator()
+		public PeopleEnum GetEnumerator()
 		{
 			return new PeopleEnum(_people);
 		}
@@ -28,6 +28,11 @@ namespace Assignment_C_Sharp_dot_NET_Basics.IEnumerable
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
+		}
+
+		IEnumerator<Person> IEnumerable<Person>.GetEnumerator()
+		{
+			return new PeopleEnum(_people);
 		}
 	}
 }

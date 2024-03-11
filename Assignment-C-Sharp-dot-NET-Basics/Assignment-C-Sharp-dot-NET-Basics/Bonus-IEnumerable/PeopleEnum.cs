@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment_C_Sharp_dot_NET_Basics.IEnumerable
+namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 {
 	public class PeopleEnum : IEnumerator<Person>
 	{
@@ -37,7 +37,7 @@ namespace Assignment_C_Sharp_dot_NET_Basics.IEnumerable
 
 		public void Dispose()
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public bool MoveNext()
