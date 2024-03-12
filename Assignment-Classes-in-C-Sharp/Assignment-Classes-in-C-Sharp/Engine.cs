@@ -17,8 +17,10 @@ namespace Assignment_Classes_in_C_Sharp
             this._fuel = fuel;
         }
 
-        protected int HorsePower { get { return _horsepower; } }
+        public int HorsePower { get { return _horsepower; } }
 
-        protected string Fuel { get { return _fuel;} }
+        public string Fuel { get { return _fuel;} }
+
+        protected abstract string Type();
     }
 }

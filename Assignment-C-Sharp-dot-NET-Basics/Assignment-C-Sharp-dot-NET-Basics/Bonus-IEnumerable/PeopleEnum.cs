@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 {
-	public class PeopleEnum : IEnumerator<Person>
+	public class PeopleEnum : IEnumerator
 	{
 		public Person[] _people;
 
@@ -17,6 +17,17 @@ namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 		{
 			_people = list;
 		}
+		public bool MoveNext()
+		{
+			position++;
+			return (position < _people.Length);
+		}
+
+		public void Reset()
+		{
+			position = -1;
+		}
+		object IEnumerator.Current => this.Current;
 
 		public Person Current
 		{
@@ -31,24 +42,6 @@ namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 					throw new InvalidOperationException();
 				}
 			}
-		}
-
-		object IEnumerator.Current => this.Current;
-
-		public void Dispose()
-		{
-			
-		}
-
-		public bool MoveNext()
-		{
-			position++;
-			return (position >= _people.Length);
-		}
-
-		public void Reset()
-		{
-			position = -1;
 		}
 	}
 }

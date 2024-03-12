@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,31 +7,26 @@ using System.Threading.Tasks;
 
 namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 {
-	public class People : IEnumerable<Person>
+	public class People : IEnumerable
 	{
 		private Person[] _people;
 
-        public People(Person[] pArray)
-        {
-            _people = new Person[pArray.Length];
-
-            for (int i = 0; i < pArray.Length; i++)
-            {
-                this._people[i] = pArray[i];
-            }
-        }
-
-		public PeopleEnum GetEnumerator()
+		public People(Person[] pArray)
 		{
-			return new PeopleEnum(_people);
+			_people = new Person[pArray.Length];
+
+			for (int i = 0; i < pArray.Length; i++)
+			{
+				this._people[i] = pArray[i];
+			}
 		}
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
 		}
 
-		IEnumerator<Person> IEnumerable<Person>.GetEnumerator()
+		public PeopleEnum GetEnumerator()
 		{
 			return new PeopleEnum(_people);
 		}
