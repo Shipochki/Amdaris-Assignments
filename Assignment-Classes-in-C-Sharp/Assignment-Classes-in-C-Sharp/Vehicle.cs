@@ -32,12 +32,12 @@ namespace Assignment_Classes_in_C_Sharp
 			get {  return this._fuelCapacity; }
 		}
 
-		public void Charge(int amount)
+		public void Load(int amount)
 		{
 			this._fuelCapacity += amount;
 		}
 
-		public void Charge()
+		public void Load()
 		{
 			if (this._engine.Fuel == "EV")
 			{
