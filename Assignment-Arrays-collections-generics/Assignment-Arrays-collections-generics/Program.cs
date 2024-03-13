@@ -18,10 +18,18 @@
 			logic.PublishingPost(3, new Post { Id = 3, Topic = "Space", Description = "SpaceX launch rocket", CreatorId = 3 });
 			logic.PublishingPost(1, new Post { Id = 1, Topic = "Fantasy", Description = "The best fantasy is ...", CreatorId = 1 });
 
-			logic.RemovePost(3);
+            Console.WriteLine();
+            logic.PublishingPost(1, null);
+			logic.PublishingPost(6, post);
 
-			post.Topic = "SportUpdate";
+            Console.WriteLine();
+            logic.RemovePost(3);
+			logic.RemovePost(5);
+
+            Console.WriteLine();
+            post.Topic = "SportUpdate";
 			logic.UpdatePost(post);
+			logic.UpdatePost(null);
 
 			List<Post> posts = logic.GetAllPosts();
             Console.WriteLine();

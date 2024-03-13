@@ -61,7 +61,16 @@
 
 		public User GetPublisherById(int creatorId)
 		{
-			return _userRepository.GetById(creatorId);
+			try
+			{
+				return _userRepository.GetById(creatorId);
+			}
+			catch (ArgumentNullException m)
+			{
+                Console.WriteLine(m.Message);
+				return null;
+			}
+			
 		}
 
 		public bool UpdatePost(Post post)

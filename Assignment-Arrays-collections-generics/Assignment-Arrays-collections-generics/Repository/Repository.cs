@@ -15,7 +15,7 @@
 		{
 			if (entity == null)
 			{
-				throw new ArgumentNullException($"Method: Add, invalid entity");
+				throw new ArgumentNullException($"Method: Add, invalid entity!");
 			}
 
 			_entities.Add(entity);
@@ -23,7 +23,12 @@
 
 		public void Delete(int id)
 		{
-			T result = GetById(id);
+			T? result = _entities.FirstOrDefault(e => e.Id == id);
+
+			if (result == null)
+			{
+				throw new ArgumentNullException($"Method: Delete, invalid Id {id} class: {typeof(T).Name}!");
+			}
 
 			_entities.Remove(result);
 		}
@@ -39,7 +44,7 @@
 
 			if (result == null)
 			{
-				throw new ArgumentNullException($"Method: GetById, invalid id {id} with type {typeof(T).Name}");
+				throw new ArgumentNullException($"Method: GetById, invalid Id {id} class: {typeof(T).Name}!");
 			}
 
 			return result;
@@ -47,12 +52,12 @@
 
 		public void Update(T entity)
 		{
-			T? result = _entities.FirstOrDefault(e => e.Id == entity.Id);
-
-			if (result == null)
+			if (entity == null)
 			{
-				throw new ArgumentNullException($"Method: Update, invalid entity");
+				throw new ArgumentNullException($"Method: Update, invalid entity!");
 			}
+
+			T? result = _entities.FirstOrDefault(e => e.Id == entity.Id);
 
 			result = entity;
 		}
