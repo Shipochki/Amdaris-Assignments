@@ -16,6 +16,11 @@ namespace Assignment_C_Sharp_dot_NET_Basics
 			People peopleList = new People(peopleArray);
 			foreach (Person p in peopleList)
 				Console.WriteLine(p.FirstName + " " + p.LastName);
-		}
+
+            for (int i = 0; i < peopleList.Length; i++)
+            {
+				Console.WriteLine(peopleList[i].LastName);
+            }
+        }
 	}
 }

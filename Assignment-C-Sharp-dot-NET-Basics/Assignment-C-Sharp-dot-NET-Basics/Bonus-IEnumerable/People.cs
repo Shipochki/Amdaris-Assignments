@@ -21,6 +21,13 @@ namespace Assignment_C_Sharp_dot_NET_Basics.Bonus_IEnumerable
 			}
 		}
 
+		public Person this[int index]
+		{
+			get { return _people[index]; }
+		}
+
+		public int Length => this._people.Length;
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
