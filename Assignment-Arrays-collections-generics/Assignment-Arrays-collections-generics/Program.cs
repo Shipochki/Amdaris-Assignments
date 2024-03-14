@@ -30,6 +30,7 @@
             post.Topic = "SportUpdate";
 			logic.UpdatePost(post);
 			logic.UpdatePost(null);
+			logic.UpdatePost(new Post() { Id = 4, Topic = "Test", Description = "Test description", CreatorId = 2 });
 
 			List<Post> posts = logic.GetAllPosts();
             Console.WriteLine();
