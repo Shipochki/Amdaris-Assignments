@@ -59,6 +59,11 @@
 
 			T? result = _entities.FirstOrDefault(e => e.Id == entity.Id);
 
+			if (result == null)
+			{
+				throw new ArgumentNullException($"Method: Update, invalid Id {entity.Id} class: {typeof(T).Name}!");
+			}
+
 			result = entity;
 		}
 	}

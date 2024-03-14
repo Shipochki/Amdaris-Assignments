@@ -11,7 +11,7 @@
             Console.WriteLine(ferrari.FuelCapacity);
 			ferrari.Info();
 
-			if(ferrari as Vehicle != null)
+			if(ferrari as Vehicle is not null)
 			{
                 Console.WriteLine("Ferrari is not null");
             }
