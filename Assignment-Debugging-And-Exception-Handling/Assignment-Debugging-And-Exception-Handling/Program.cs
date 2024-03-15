@@ -21,7 +21,6 @@ namespace Assignment_Debugging_And_Exception_Handling
 			catch (ArgumentNullException m)
 			{
 				Console.WriteLine(m.Message);
-				throw;
 			}
 			catch (CarCollectionException m)
 			{
@@ -115,7 +114,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 
 			if(result == null)
 			{
-				throw new RemoveCarException("Can't find car with same Brand");
+				throw new RemoveCarException($"Can't find car with this Brand: {brand}");
 			}
 
 			cars.Remove(result);
