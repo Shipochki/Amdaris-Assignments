@@ -6,6 +6,7 @@
     <RootNamespace>Assignment_Debugging_And_Exception_Handling</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Stage</Configurations>
   </PropertyGroup>
 
 </Project>

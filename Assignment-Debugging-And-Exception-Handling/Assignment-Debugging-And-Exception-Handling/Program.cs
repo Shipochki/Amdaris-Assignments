@@ -14,7 +14,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 
 			Removing(cars);
 
-#if (STAGE)
+#if STAGE
 
 			PrintCarCollection(cars);
 
@@ -58,7 +58,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 
 			try
 			{
-				//AddCar(car, cars); //Adding car without Exceptions
+				AddCar(car, cars); //Adding car without Exceptions
 				//AddCar(null, cars); //Throwing ArgumentNullException
 				//AddCar(car, null); //Throwing CarCollectionException
 			}
@@ -89,7 +89,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 		{
 			try
 			{
-				//RemoveCar("VW", cars); //Removing car without Exceptions
+				RemoveCar("VW", cars); //Removing car without Exceptions
 				//RemoveCar("Volvo", cars); //Throwing RemoveCarException
 				//RemoveCar("VW", null); //Throwing CarCollectionException
 			}
@@ -175,9 +175,8 @@ namespace Assignment_Debugging_And_Exception_Handling
 					//Print(null);
 				}
 			}
-			catch (ArgumentNullException m)
+			catch (Exception e)
 			{
-				Console.WriteLine(m.Message);
 				throw;
 			}
 
