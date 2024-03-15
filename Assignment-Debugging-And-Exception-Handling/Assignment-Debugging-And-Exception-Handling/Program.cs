@@ -58,9 +58,9 @@ namespace Assignment_Debugging_And_Exception_Handling
 
 			try
 			{
-				//AddCar(car, cars);
-				//AddCar(null, cars);
-				//AddCar(car, null);
+				//AddCar(car, cars); //Adding car without Exceptions
+				//AddCar(null, cars); //Throwing ArgumentNullException
+				//AddCar(car, null); //Throwing CarCollectionException
 			}
 			catch (ArgumentNullException m)
 			{
@@ -73,7 +73,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 			}
 			finally
 			{
-				if(cars.FirstOrDefault(c => c.Brand == car.Brand) != null)
+				if(cars.FirstOrDefault(c => c.Brand == "Seat") != null)
 				{
                     Console.WriteLine("Successfully added Car!");
                 }
@@ -87,12 +87,11 @@ namespace Assignment_Debugging_And_Exception_Handling
 		/// <param name="cars"></param>
 		public static void Removing(List<Car> cars)
 		{
-			Car car = new Car() { Brand = "Seat", Model = "Leon", Color = "Yellow" };
-
 			try
 			{
-				//RemoveCar(cars.First().Brand, cars);
-				//RemoveCar(car.Brand, cars);
+				//RemoveCar("VW", cars); //Removing car without Exceptions
+				//RemoveCar("Volvo", cars); //Throwing RemoveCarException
+				//RemoveCar("VW", null); //Throwing CarCollectionException
 			}
 			catch (CarCollectionException m)
 			{
@@ -106,7 +105,7 @@ namespace Assignment_Debugging_And_Exception_Handling
 			}
 			finally
 			{
-				if (cars.FirstOrDefault(c => c.Brand == car.Brand) == null)
+				if (cars.FirstOrDefault(c => c.Brand == "VW") == null)
 				{
 					Console.WriteLine("Successfully removed Car!");
 				}
