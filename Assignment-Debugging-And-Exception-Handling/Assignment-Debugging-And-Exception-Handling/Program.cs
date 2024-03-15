@@ -10,57 +10,16 @@ namespace Assignment_Debugging_And_Exception_Handling
 		{
 			List<Car> cars = LoadCars();
 
-			Car car = new Car() { Brand = "Seat", Model = "Leon", Color = "Yellow" };
+			Adding(cars);
 
-			try
-			{
-				//AddCar(car, cars);
-				//AddCar(null, cars);
-				//AddCar(car, null);
-			}
-			catch (ArgumentNullException m)
-			{
-				Console.WriteLine(m.Message);
-			}
-			catch (CarCollectionException m)
-			{
-				Console.WriteLine(m.Message);
-				throw;
-			}
-			finally
-			{
-				Console.WriteLine("Finally Add Car");
-			}
-
-			try
-			{
-				//RemoveCar(cars.First(), cars);
-				//RemoveCar(string.Empty, cars);
-				//RemoveCar(car, cars);
-			}
-			catch (CarCollectionException m)
-			{
-				Console.WriteLine(m.Message);
-				throw;
-			}
-			catch (RemoveCarException m)
-			{
-				Console.WriteLine(m.Message);
-				throw;
-			}
-			finally
-			{
-				Console.WriteLine("Finally Remove Car");
-			}
-
+			Removing(cars);
 
 #if (STAGE)
-            foreach (var item in cars)
-            {
-                Console.WriteLine($"{item.Brand} {item.Model} {item.Color}");
-            }
+
+			PrintCarCollection(cars);
+
 #endif
-        }
+		}
 
 		public static List<Car> LoadCars()
 		{
@@ -88,6 +47,74 @@ namespace Assignment_Debugging_And_Exception_Handling
 			return new List<Car> { car, car2, car3 };
 		}
 
+
+		/// <summary>
+		/// Presents add functionality
+		/// </summary>
+		/// <param name="cars"></param>
+		public static void Adding(List<Car> cars)
+		{
+			Car car = new Car() { Brand = "Seat", Model = "Leon", Color = "Yellow" };
+
+			try
+			{
+				//AddCar(car, cars);
+				//AddCar(null, cars);
+				//AddCar(car, null);
+			}
+			catch (ArgumentNullException m)
+			{
+				Console.WriteLine(m.Message);
+			}
+			catch (CarCollectionException m)
+			{
+				Console.WriteLine(m.Message);
+				throw;
+			}
+			finally
+			{
+				Console.WriteLine("Finally Add Car");
+			}
+		}
+
+
+		/// <summary>
+		/// Present delete functionality
+		/// </summary>
+		/// <param name="cars"></param>
+		public static void Removing(List<Car> cars)
+		{
+			Car car = new Car() { Brand = "Seat", Model = "Leon", Color = "Yellow" };
+
+			try
+			{
+				//RemoveCar(cars.First().Brand, cars);
+				//RemoveCar(car.Brand, cars);
+			}
+			catch (CarCollectionException m)
+			{
+				Console.WriteLine(m.Message);
+				throw;
+			}
+			catch (RemoveCarException m)
+			{
+				Console.WriteLine(m.Message);
+				throw;
+			}
+			finally
+			{
+				Console.WriteLine("Finally Remove Car");
+			}
+		}
+
+
+		/// <summary>
+		/// Functionality for adding car in cars 
+		/// </summary>
+		/// <param name="car"></param>
+		/// <param name="cars"></param>
+		/// <exception cref="ArgumentNullException"></exception>
+		/// <exception cref="CarCollectionException"></exception>
 		public static void AddCar(Car car, List<Car> cars)
 		{
 			if (car == null)
@@ -103,6 +130,14 @@ namespace Assignment_Debugging_And_Exception_Handling
 			cars.Add(car);
 		}
 
+
+		/// <summary>
+		/// Functionality for deleting car with matching brand in cars
+		/// </summary>
+		/// <param name="brand"></param>
+		/// <param name="cars"></param>
+		/// <exception cref="CarCollectionException"></exception>
+		/// <exception cref="RemoveCarException"></exception>
 		public static void RemoveCar(string brand, List<Car> cars)
 		{
 			if (cars == null)
@@ -112,12 +147,45 @@ namespace Assignment_Debugging_And_Exception_Handling
 
 			Car? result = cars.FirstOrDefault(c => c.Brand == brand);
 
-			if(result == null)
+			if (result == null)
 			{
 				throw new RemoveCarException($"Can't find car with this Brand: {brand}");
 			}
 
 			cars.Remove(result);
+		}
+
+
+		/// <summary>
+		/// Method for printing collection of cars
+		/// </summary>
+		/// <param name="cars"></param>
+		public static void PrintCarCollection(List<Car> cars)
+		{
+			try
+			{
+				foreach (var car in cars)
+				{
+					Print(car);
+					//Print(null);
+				}
+			}
+			catch (ArgumentNullException m)
+			{
+				Console.WriteLine(m.Message);
+				throw;
+			}
+
+		}
+
+		public static void Print(Car car)
+		{
+			if (car == null)
+			{
+				throw new ArgumentNullException($"In Print method car is null");
+			}
+
+			Console.WriteLine($"{car.Brand} {car.Model} {car.Color}");
 		}
 	}
 }
