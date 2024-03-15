@@ -73,7 +73,10 @@ namespace Assignment_Debugging_And_Exception_Handling
 			}
 			finally
 			{
-				Console.WriteLine("Finally Add Car");
+				if(cars.FirstOrDefault(c => c.Brand == car.Brand) != null)
+				{
+                    Console.WriteLine("Successfully added Car!");
+                }
 			}
 		}
 
@@ -103,7 +106,10 @@ namespace Assignment_Debugging_And_Exception_Handling
 			}
 			finally
 			{
-				Console.WriteLine("Finally Remove Car");
+				if (cars.FirstOrDefault(c => c.Brand == car.Brand) == null)
+				{
+					Console.WriteLine("Successfully removed Car!");
+				}
 			}
 		}
 
