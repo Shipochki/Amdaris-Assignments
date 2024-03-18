@@ -3,7 +3,7 @@
 	public static class UserExtensions
 	{
 		/// <summary>
-		/// Extension method
+		/// Extension method for class
 		/// </summary>
 		/// <param name="user"></param>
 		/// <returns></returns>
