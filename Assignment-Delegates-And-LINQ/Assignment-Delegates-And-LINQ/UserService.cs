@@ -11,7 +11,8 @@
 		{
 			new User() { Name = "Stefan", Email= "stefan@gmail.com"},
 			new User() { Name = "Tinko", Email = "tinko@abv.bg"},
-			new User() { Name = "Nikola", Email = "nikola@yahoo.com"}
+			new User() { Name = "Nikola", Email = "nikola@yahoo.com"},
+			new User() { Email = "penko@abv.bg"}
 		};
 
 		/// <summary>
@@ -30,6 +31,20 @@
             }
 			return null;
         }
+
+		public bool Delete(CompareDelegate compare)
+		{
+			foreach(var user in _users)
+			{
+				if (compare(user))
+				{
+					_users.Remove(user);
+					return true;
+				}
+			}
+
+			return false;
+		}
 
 		public int CountUsers => _users.Count();
 

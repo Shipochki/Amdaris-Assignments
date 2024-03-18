@@ -46,6 +46,10 @@
 
             Console.WriteLine();
             if (user3 != null) print($"Email: {user3.Email}");
+
+			//Manipulate collection via delegate
+			userService.Delete(u => u.Email == "penko@abv.bg");
+            printCount(userService.CountUsers);
 		}
 	}
 }
