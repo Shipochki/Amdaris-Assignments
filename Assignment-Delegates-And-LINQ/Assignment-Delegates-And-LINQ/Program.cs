@@ -1,6 +1,5 @@
 ﻿namespace Assignment_Delegates_And_LINQ
 {
-	using static UserExtensions;
 	internal class Program
 	{
 		public delegate void Print(string value);
@@ -12,10 +11,7 @@
 			UserService userService = new UserService();
 
 			//Anonymous method
-			Print print = delegate (string value)
-						{
-							Console.WriteLine(value);
-						};
+			Print print = Console.WriteLine;
 
 			//Anonymous method with lambda expression
 			PrintCount printCount = value => Console.WriteLine($"Count is {value}");
