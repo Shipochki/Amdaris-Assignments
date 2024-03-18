@@ -21,10 +21,12 @@
 			PrintCount printCount = value => Console.WriteLine($"Count is {value}");
 
 			User user1 = userService.Find(u => u.Name == "Nikola");
+			//Using extension method Info
 			print(user1.Info());
 
             Console.WriteLine();
             User user2 = userService.Find(u => u.Email == "stefan@gmail.com");
+			//Using extension method Info
 			print(user2.Info());
 
             Console.WriteLine();
