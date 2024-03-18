@@ -11,7 +11,10 @@
 			UserService userService = new UserService();
 
 			//Anonymous method
-			Print print = Console.WriteLine;
+			Print print = delegate (string value)
+			{
+				Console.WriteLine($"Count is {value}");
+			};
 
 			//Anonymous method with lambda expression / Anonymous function
 			PrintCount printCount = value => Console.WriteLine($"Count is {value}");
