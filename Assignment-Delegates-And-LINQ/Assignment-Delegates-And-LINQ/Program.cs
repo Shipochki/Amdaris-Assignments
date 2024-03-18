@@ -25,7 +25,13 @@
 			//Using extension method Info
 			print(user2.Info());
 
-            Console.WriteLine();
+			//Function
+			Func<User, User, bool> Compare = (user1, user2) => user1.Name == user2.Name;
+
+			//Action
+			Action<string> greet = name => Console.WriteLine($"Hello, {name}");
+
+			Console.WriteLine();
             printCount(userService.CountUser);
 
 			var user3 = userService
