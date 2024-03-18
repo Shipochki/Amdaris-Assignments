@@ -31,8 +31,12 @@
 			//Action
 			Action<string> greet = name => Console.WriteLine($"Hello, {name}");
 
-			Console.WriteLine();
-            printCount(userService.CountUser);
+            Console.WriteLine();
+			//Extension method on a collection
+            Console.WriteLine($"Count valid names: {userService.Users.CountValidNames()}");
+
+            Console.WriteLine();
+            printCount(userService.CountUsers);
 
 			var user3 = userService
 				.Users

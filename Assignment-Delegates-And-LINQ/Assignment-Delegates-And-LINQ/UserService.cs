@@ -31,7 +31,7 @@
 			return null;
         }
 
-		public int CountUser => _users.Count();
+		public int CountUsers => _users.Count();
 
 		public List<User> Users => _users;
     }
