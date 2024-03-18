@@ -13,7 +13,7 @@
 			//Anonymous method
 			Print print = Console.WriteLine;
 
-			//Anonymous method with lambda expression
+			//Anonymous method with lambda expression / Anonymous function
 			PrintCount printCount = value => Console.WriteLine($"Count is {value}");
 
 			User user1 = userService.Find(u => u.Name == "Nikola");
@@ -38,6 +38,7 @@
             Console.WriteLine();
             printCount(userService.CountUsers);
 
+			//Using Select and Where
 			var user3 = userService
 				.Users
 				.Where(u => u.Name == "Tinko")
