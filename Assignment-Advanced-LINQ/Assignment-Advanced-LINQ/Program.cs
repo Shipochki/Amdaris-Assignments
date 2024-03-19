@@ -33,6 +33,8 @@ namespace Assignment_Advanced_LINQ
 			ConverstionMethod();
 			Console.WriteLine();
 			AggregationMethod(posts);
+            Console.WriteLine();
+			QuantifiersMethod(posts);
 			Console.WriteLine();
 			ElementOperators(posts);
 			Console.WriteLine();
@@ -135,6 +137,12 @@ namespace Assignment_Advanced_LINQ
 			string[] toArray = list3.ToArray();
 			Console.WriteLine($"ToArray - {string.Join(" ", toArray)}");
 
+            //ToList
+            Console.WriteLine();
+			string[] strings = toArray;
+			List<string> list4 = strings.ToList();
+			Console.WriteLine($"ToList - {string.Join(" ", list4)}");
+
 			//ToDictionary
 			Console.WriteLine();
 			List<Package> packages = new List<Package>
@@ -195,6 +203,18 @@ namespace Assignment_Advanced_LINQ
 			Console.WriteLine($"Average - {grades.Average()}");
 			Console.WriteLine($"Aggregate - {grades.Aggregate(20, (biggest, next) => next > biggest ? next : biggest)}");
 		}
+
+		static void QuantifiersMethod(List<Post> posts)
+		{
+            Console.WriteLine("QuantifiersMethod example:");
+            Console.WriteLine($"Contains - {posts.Contains(posts.First())}");
+			Console.WriteLine($"Any - {posts.Any(p => p.Topic.StartsWith("N"))}");
+			Console.WriteLine($"All - {posts.All(p => p.Topic.StartsWith("S"))}");
+
+			List<string> list1 = new List<string>() { "1", "2", "3", "c" };
+			List<string> list2 = new List<string>() { "a", "b", "c" };
+			Console.WriteLine($"SequenceEqual - {list1.SequenceEqual(list2)}");
+        }
 
 		static void ElementOperators(List<Post> posts)
 		{
