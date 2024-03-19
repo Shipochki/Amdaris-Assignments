@@ -90,7 +90,11 @@ namespace Assignment_Advanced_LINQ
 			foreach (var post in result)
 			{
 				Console.WriteLine($"Creator: {post.Key.Name}");
-			}
+                foreach (var item in post)
+                {
+                    Console.WriteLine($"  -- {item.Topic}");
+                }
+            }
 		}
 
 		static void SetOperatosMethod()
