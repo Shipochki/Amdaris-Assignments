@@ -10,16 +10,17 @@ namespace Disposal_And_Garbage_Collection
 			string password = "tdjo oqqu fbbk vhpp";
 			string emailSender = "travelbuddies.amdaris@gmail.com";
 
-			SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+			using SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
 			smtpClient.EnableSsl = true;
 			smtpClient.UseDefaultCredentials = false;
 			smtpClient.Credentials = new NetworkCredential(emailSender, password);
 
-			MailMessage mailMessage = new MailMessage();
+			using MailMessage mailMessage = new MailMessage();
 			mailMessage.From = new MailAddress(emailSender);
 			mailMessage.To.Add(reciverEmail);
 			mailMessage.Subject = subject;
 			mailMessage.Body = body;
+
 			smtpClient.Send(mailMessage);
 		}
 	}

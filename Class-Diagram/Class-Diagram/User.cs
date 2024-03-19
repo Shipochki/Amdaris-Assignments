@@ -20,11 +20,7 @@ namespace Class_Diagram
 
 		public bool IsEmailConfirmed { get; set; }
 
-		public int VerificationEmailId { get; set; }
-
-		public VerificationEmail VerificationEmail { get; set; } = null!;
-
-		public bool IsVerified { get; set; }
+		public bool IsSubscriptionPaid { get; set; }
 
 		public string PasswordHashed { get; set; } = null!;
 
