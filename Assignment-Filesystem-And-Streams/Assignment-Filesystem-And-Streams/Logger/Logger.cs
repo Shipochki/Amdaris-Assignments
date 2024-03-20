@@ -10,11 +10,6 @@
 		public async void Log(string message)
 		{
 			string pathExtension = $"\\Logs_{DateTime.UtcNow.ToString("dd-MM-yyyy")}";
-			if (!File.Exists(path + pathExtension))
-			{
-				using FileStream fs = File.Create(path + pathExtension);
-			}
-
 			await File.AppendAllTextAsync(path + pathExtension, message + Environment.NewLine);
 		}
 
