@@ -2,27 +2,35 @@
 {
 	public class Logger : ILogger
 	{
-        public Logger()
-        {
-        }
-
-        public void Log(string message)
+		private string path = @"D:\Amdaris-Assignments\Amdaris-Assignments\Assignment-Filesystem-And-Streams\Assignment-Filesystem-And-Streams\Logs";
+		public Logger()
 		{
-			using (StreamWriter sw = new StreamWriter($"Logs\\Logs_{DateTime.UtcNow}"))
+		}
+
+		public async void Log(string message)
+		{
+			string pathExtension = $"\\Logs_{DateTime.UtcNow.ToString("dd-MM-yyyy")}";
+			if (!File.Exists(path + pathExtension))
 			{
-				sw.WriteLine(message);
+				using FileStream fs = File.Create(path + pathExtension);
 			}
+
+			await File.AppendAllTextAsync(path + pathExtension, message + Environment.NewLine);
 		}
 
 		public void Read()
 		{
-			string? line = string.Empty;
-			using(StringReader sr = new StringReader($"Logs\\Logs_{DateTime.UtcNow}"))
+			string pathExtension = $"\\Logs_{DateTime.UtcNow.ToString("dd-MM-yyyy")}";
+			if (File.Exists(path + pathExtension))
 			{
-				while((line = sr.ReadLine()) != null)
+				using (StreamReader sr = File.OpenText(path + pathExtension))
 				{
-                    Console.WriteLine(line);
-                }
+					string? line = string.Empty;
+					while ((line = sr.ReadLine()) != null)
+					{
+						Console.WriteLine(line);
+					}
+				}
 			}
 		}
 	}
