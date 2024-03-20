@@ -5,7 +5,7 @@
 
 	internal class Program
 	{
-		static readonly Logger.Logger logger = new Logger.Logger();
+		static readonly Logger.ILogger logger = new Logger.Logger();
 		static List<Post> posts = new List<Post>();
 
 		static void Main(string[] args)

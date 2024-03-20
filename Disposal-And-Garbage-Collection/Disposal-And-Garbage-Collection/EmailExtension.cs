@@ -21,7 +21,15 @@ namespace Disposal_And_Garbage_Collection
 			mailMessage.Subject = subject;
 			mailMessage.Body = body;
 
-			smtpClient.Send(mailMessage);
+			string userState = "test message1";
+			smtpClient.SendAsync(mailMessage, userState);
+			Console.WriteLine("Sending message:");
+			for (int i = 0; i <= 10; i++)
+			{
+				Console.WriteLine($"Loading: {i}0%/100%");
+				Thread.Sleep(300);
+				Console.Clear();
+			}
 		}
 	}
 }
