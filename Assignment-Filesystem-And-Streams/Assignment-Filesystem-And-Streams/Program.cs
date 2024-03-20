@@ -16,7 +16,7 @@
 			try
 			{
 				//AddPost(new Post() { Id = 1, Name = "News" });
-				AddPost(null);
+				//AddPost(null);
 			}
 			catch (ArgumentNullException m)
 			{

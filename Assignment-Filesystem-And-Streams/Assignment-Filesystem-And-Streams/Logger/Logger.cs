@@ -13,20 +13,13 @@
 			await File.AppendAllTextAsync(path + pathExtension, message + Environment.NewLine);
 		}
 
-		public void Read()
+		public async void Read()
 		{
 			string pathExtension = $"\\Logs_{DateTime.UtcNow.ToString("dd-MM-yyyy")}";
 			if (File.Exists(path + pathExtension))
 			{
-				using (StreamReader sr = File.OpenText(path + pathExtension))
-				{
-					string? line = string.Empty;
-					while ((line = sr.ReadLine()) != null)
-					{
-						Console.WriteLine(line);
-					}
-				}
-			}
+                await Console.Out.WriteLineAsync(await File.ReadAllTextAsync(path + pathExtension));
+            }
 		}
 	}
 }
