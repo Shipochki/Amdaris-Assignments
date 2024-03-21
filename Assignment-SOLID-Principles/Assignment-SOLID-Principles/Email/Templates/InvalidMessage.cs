@@ -1,9 +1,9 @@
 ﻿
 namespace Assignment_SOLID_Principles.Email.Templates
 {
-	public class InvalidMessage : IMessageTemplate
+	public class InvalidMessage : MessageTemplate
 	{
-		public string Message(string receiverMail, string message)
+		public override string Message(string receiverMail, string message)
 		{
 			return $"Error send message: {message} to {receiverMail}";
 		}

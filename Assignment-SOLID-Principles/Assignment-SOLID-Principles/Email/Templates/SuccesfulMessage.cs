@@ -1,8 +1,8 @@
 ﻿namespace Assignment_SOLID_Principles.Email.Templates
 {
-	public class SuccesfulMessage : IMessageTemplate
+	public class SuccesfulMessage : MessageTemplate
 	{
-		public string Message(string receiverMail, string message)
+		public override string Message(string receiverMail, string message)
 		{
 			return $"Succesful send message: {message} to {receiverMail}";
 		}

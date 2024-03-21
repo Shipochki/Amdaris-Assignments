@@ -1,7 +1,7 @@
-﻿using Assignment_SOLID_Principles.Email.Templates;
-
-namespace Assignment_SOLID_Principles.Email
+﻿namespace Assignment_SOLID_Principles.Email
 {
+	using Assignment_SOLID_Principles.Email.Templates;
+
 	public class EmailSender : IEmailSender
 	{
 		private string _senderMail = "sender@gmail.com";
@@ -10,14 +10,14 @@ namespace Assignment_SOLID_Principles.Email
 		{
 			try
 			{
-                Console.WriteLine($"{_senderMail} send message to {receiverMail}");
-                SuccesfulMessage succesfulMessage = new SuccesfulMessage();
-                Console.WriteLine(succesfulMessage.Message(receiverMail, message));
-            }
+				Console.WriteLine($"{_senderMail} send message to {receiverMail}");
+				SuccesfulMessage succesfulMessage = new SuccesfulMessage();
+				Console.WriteLine(succesfulMessage.Message(receiverMail, message));
+			}
 			catch (Exception)
 			{
 				InvalidMessage invalidMessage = new InvalidMessage();
-                Console.WriteLine(invalidMessage.Message(receiverMail, message));
+				Console.WriteLine(invalidMessage.Message(receiverMail, message));
 			}
 		}
 
@@ -25,5 +25,7 @@ namespace Assignment_SOLID_Principles.Email
 		{
 			_senderMail = senderMail;
 		}
+
+		public string SenderMail => _senderMail;
 	}
 }
