@@ -13,7 +13,5 @@
 		{
             Console.WriteLine($"{_senderNumber} send sms message \"{message}\" to {receiverNumber}");
         }
-
-        public string SenderNumber => _senderNumber;
     }
 }

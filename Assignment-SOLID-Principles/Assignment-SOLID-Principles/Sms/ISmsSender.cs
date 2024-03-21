@@ -3,6 +3,6 @@ namespace Assignment_SOLID_Principles.Sms
 {
 	public interface ISmsSender
 	{
-		void SmsSend(string number, string receiver);
+		void SmsSend(string number, string message);
 	}
 }
