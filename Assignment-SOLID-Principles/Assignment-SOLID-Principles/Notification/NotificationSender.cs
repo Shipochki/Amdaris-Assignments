@@ -6,7 +6,7 @@ namespace Assignment_SOLID_Principles.Notification
 	{
 		public void SendNotification(string type)
 		{
-			BaseNotification notifi = null;
+			BaseNotification? notifi = null;
 
 			if(type == "media")
 			{

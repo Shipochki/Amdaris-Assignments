@@ -8,7 +8,7 @@
 
 		public void SendEmail(string receiverMail, string message)
 		{
-			MessageTemplate messageType = null;
+			MessageTemplate? messageType = null;
 
 			try
 			{
