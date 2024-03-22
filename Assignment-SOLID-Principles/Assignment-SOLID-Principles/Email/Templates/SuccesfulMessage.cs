@@ -4,7 +4,7 @@
 	{
 		public override string Message(string receiverMail, string message)
 		{
-			return $"Succesful send message: {message} to {receiverMail}";
+			return $"Status - Succesful send message: {message} to {receiverMail}";
 		}
 	}
 }

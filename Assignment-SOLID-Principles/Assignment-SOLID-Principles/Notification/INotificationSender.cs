@@ -2,6 +2,6 @@
 {
 	public interface INotificationSender
 	{
-		void SendNotification(string type);
+		void SendNotification(string type, string textOrMedia);
 	}
 }

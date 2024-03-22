@@ -4,23 +4,19 @@
 
 	public class NotificationSender : INotificationSender
 	{
-		public void SendNotification(string type)
+		public void SendNotification(string type, string textOrMedia)
 		{
 			BaseNotification? notifi = null;
 
 			if (type == "media")
 			{
 				notifi = new MediaNotification();
-				Console.WriteLine(notifi.Notification());
+				Console.WriteLine(notifi.Notification(textOrMedia));
 			}
 			else if (type == "text")
 			{
 				notifi = new TextNotification();
-				Console.WriteLine(notifi.Notification());
-			}
-			else
-			{
-				Console.WriteLine("InvalidType");
+				Console.WriteLine(notifi.Notification(textOrMedia));
 			}
 		}
 	}

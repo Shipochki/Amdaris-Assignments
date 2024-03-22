@@ -6,20 +6,20 @@
 	{
 		private string _senderMail = "sender@gmail.com";
 
-		public void SendEmail(string receiverMail, string message)
+		public void SendMail(string receiverMail, string message)
 		{
 			MessageTemplate? messageType = null;
 
 			try
 			{
 				//write message to receiver
-				MessageWriter($"{_senderMail} send message to {receiverMail}");
+				MessageWriter(receiverMail);
 
 				//Stauts for message
 				messageType = new SuccesfulMessage();
 				Console.WriteLine(messageType.Message(receiverMail, message));
 			}
-			catch (ArgumentNullException m)
+			catch (ArgumentException m)
 			{
                 Console.WriteLine(m.Message);
 
@@ -34,14 +34,14 @@
 			_senderMail = senderMail;
 		}
 
-		public void MessageWriter(string text)
+		public void MessageWriter(string receiverMail)
 		{
-			if(text == null)
+			if(!receiverMail.Contains("@"))
 			{
-				throw new ArgumentNullException("Invalid text");
+				throw new ArgumentException("Invalid mail");
 			}
 
-            Console.WriteLine(text);
+            Console.WriteLine($"{_senderMail} send message to {receiverMail}");
         }
 
 		public string SenderMail => _senderMail;

@@ -2,9 +2,9 @@
 {
 	public class TextNotification : BaseNotification
 	{
-		public override string Notification()
+		public override string Notification(string input)
 		{
-			return "Send text notification";
+			return $"Send text notification: \"{input}\" ";
 		}
 	}
 }

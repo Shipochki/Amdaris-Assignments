@@ -2,6 +2,6 @@
 {
 	public abstract class BaseNotification
 	{
-		public abstract string Notification();
+		public abstract string Notification(string input);
 	}
 }
