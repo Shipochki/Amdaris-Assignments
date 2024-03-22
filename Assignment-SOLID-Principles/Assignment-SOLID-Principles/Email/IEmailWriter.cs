@@ -2,6 +2,6 @@
 {
     public interface IEmailWriter
     {
-        public void Write(string text);
+        public void MessageWriter(string text);
     }
 }

@@ -12,7 +12,7 @@
 
 			try
 			{
-				Write($"{_senderMail} send message to {receiverMail}");
+				MessageWriter($"{_senderMail} send message to {receiverMail}");
 				messageType = new SuccesfulMessage();
 				Console.WriteLine(messageType.Message(receiverMail, message));
 			}
@@ -28,7 +28,7 @@
 			_senderMail = senderMail;
 		}
 
-		public void Write(string text)
+		public void MessageWriter(string text)
 		{
             Console.WriteLine(text);
         }
