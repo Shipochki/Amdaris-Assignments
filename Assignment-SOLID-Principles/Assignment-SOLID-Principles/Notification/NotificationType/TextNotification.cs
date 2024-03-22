@@ -4,7 +4,7 @@
 	{
 		public override string Notification()
 		{
-			return "This is text notification";
+			return "Send text notification";
 		}
 	}
 }

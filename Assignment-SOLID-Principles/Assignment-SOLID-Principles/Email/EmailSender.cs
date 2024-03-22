@@ -12,14 +12,20 @@
 
 			try
 			{
+				//write message to receiver
 				MessageWriter($"{_senderMail} send message to {receiverMail}");
+
+				//Stauts for message
 				messageType = new SuccesfulMessage();
 				Console.WriteLine(messageType.Message(receiverMail, message));
 			}
-			catch (Exception)
+			catch (ArgumentNullException m)
 			{
+                Console.WriteLine(m.Message);
+
+				//Status for message
 				messageType = new InvalidMessage();
-				Console.WriteLine(messageType.Message(receiverMail, message));
+                Console.WriteLine(messageType.Message(receiverMail, message));
 			}
 		}
 
@@ -30,6 +36,11 @@
 
 		public void MessageWriter(string text)
 		{
+			if(text == null)
+			{
+				throw new ArgumentNullException("Invalid text");
+			}
+
             Console.WriteLine(text);
         }
 

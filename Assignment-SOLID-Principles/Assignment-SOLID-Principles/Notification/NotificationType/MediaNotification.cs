@@ -5,7 +5,7 @@ namespace Assignment_SOLID_Principles.Notification.NotificationType
 	{
 		public override string Notification()
 		{
-			return "This is media notification";
+			return "Send media notification";
 		}
 	}
 }
