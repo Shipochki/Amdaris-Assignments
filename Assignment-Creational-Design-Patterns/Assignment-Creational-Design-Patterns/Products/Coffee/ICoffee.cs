@@ -2,12 +2,12 @@
 {
     using Assignment_Creational_Design_Patterns.Products.Milk;
 
-    public interface ICoffe
+    public interface ICoffee
     {
-        public int AmountBlackCoffe { get; set; }
+        public int AmountBlackCoffee { get; set; }
 
         public int AmountSugar { get; set; }
 
-        public List<IMilkType> Milk { get; set; }
+        public List<IMilk> Milk { get; set; }
     }
 }
