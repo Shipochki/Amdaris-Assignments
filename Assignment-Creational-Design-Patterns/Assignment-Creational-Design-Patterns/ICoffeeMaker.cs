@@ -3,7 +3,7 @@
 	using Assignment_Creational_Design_Patterns.Products.Coffe;
 	using Assignment_Creational_Design_Patterns.Products.Milk;
 
-	public interface ICoffeMaker
+	public interface ICoffeeMaker
 	{
 		public void MakeCoffee(ICoffee coffee);
 

@@ -3,11 +3,11 @@
 	using Assignment_Creational_Design_Patterns.Products.Coffe;
 	using Assignment_Creational_Design_Patterns.Products.Milk;
 
-	public class CoffeMaker : ICoffeMaker
+	public class CoffeeMaker : ICoffeeMaker
 	{
 		private readonly List<ICoffee> coffees;
 
-		public CoffeMaker()
+		public CoffeeMaker()
 		{
 			this.coffees = new List<ICoffee>();
 		}
@@ -49,12 +49,12 @@
 
 		public string ServeCoffees()
 		{
-			return $"Serving: {string.Join(" ", this.coffees.Select(c => nameof(c)))}";
+			return $"Serving coffees: {string.Join(", ", this.coffees.Select(c => c.GetType().Name).ToList())}";
 		}
 
 		private bool IsValidCoffee(ICoffee coffee)
 		{
-			string nameOfCoffee = nameof(coffee);
+			string nameOfCoffee = coffee.GetType().Name;
 
 			if (nameOfCoffee == nameof(FlatWhite)
 				|| nameOfCoffee == nameof(Cappuccino)
@@ -68,7 +68,7 @@
 
 		private bool IsValidMilk(IMilk milk)
 		{
-			string nameOfMilk = (nameof(milk));
+			string nameOfMilk = milk.GetType().Name;
 
 			if (nameOfMilk == nameof(OatMilk)
 				|| nameOfMilk == nameof(RegularMilk)
