@@ -6,59 +6,106 @@
 
 	public class BookStore
 	{
+		private readonly Repository<User> _userRepository;
+		private readonly Repository<Order> _orderRepository;
+		private readonly Repository<Book> _bookRepository;
+		private readonly MailSender _sender;
+
+		public BookStore()
+		{
+			_userRepository = new Repository<User>(new DbContext<User>());
+			_orderRepository = new Repository<Order>(new DbContext<Order>());
+			_bookRepository = new Repository<Book>(new DbContext<Book>());
+			_sender = new MailSender();
+		}
+
 		public void Run()
 		{
-			Repository<User> userRepository = new Repository<User>(new DbContext<User>());
-			int penko = userRepository.Add(new User() { Name = "Penko", Email = "penko@abv.bg", Role = Enums.Role.Customer, IsSubscribe = false });
-			int stefan = userRepository.Add(new User() { Name = "Stefan", Email = "stefan@gmail.com", Role = Enums.Role.Staff, IsSubscribe = false });
-			int nikola = userRepository.Add(new User() { Name = "Nikola", Email = "nikola@gmail.com", Role = Enums.Role.Staff, IsSubscribe = true });
-
-			Repository<Order> orderRepository = new Repository<Order>(new DbContext<Order>());
-
-			Repository<Book> bookRepository = new Repository<Book>(new DbContext<Book>());
-			int potter1 = bookRepository.Add(new Book() { Name = "Harry Potter and the Philosopher's Stone" });
-			int potter2 = bookRepository.Add(new Book() { Name = "Harry Potter and the Chamber of Secrets" });
-			int potter3 = bookRepository.Add(new Book() { Name = "Harry Potter and the Prisoner of Azkaban" });
+			SetData();
 
 			//Subscribing
-			userRepository.GetEntityById(penko)?.Subscribe();
-			userRepository.GetEntityById(stefan)?.Subscribe();
+			_userRepository
+				.GetAll()
+				.FirstOrDefault(u => u.Email == "penko@abv.bg")?
+				.Subscribe();
+
+			_userRepository
+				.GetAll()
+				.FirstOrDefault(u => u.Email == "stefan@gmail.com")?
+				.Subscribe();
 
 			//Unsubscribing
-			userRepository.GetEntityById(nikola)?.UnSubscribe();
+			_userRepository
+				.GetAll()
+				.FirstOrDefault(u => u.Email == "nikola@gmail.com")?
+				.UnSubscribe();
+
+			List<User> staff = _userRepository
+							.GetAll()
+							.Where(u => u.Role.Equals(Enums.Role.Staff))
+							.ToList();
+
+			//Place an order
+			Order order = PlaceAnOrder(staff);
+
+			Preparing(order, staff);
+		}
+
+		public Order PlaceAnOrder(List<User> staff)
+		{
+			User user = _userRepository
+				.GetAll()
+				.FirstOrDefault(u => u.Email == "penko@abv.bg") ?? new User();
+
+			Book book1 = _bookRepository
+					.GetAll()
+					.FirstOrDefault(c => c.Name == "Harry Potter and the Philosopher's Stone") ?? new Book();
+
+			Book book2 = _bookRepository
+					.GetAll()
+					.FirstOrDefault(c => c.Name == "Harry Potter and the Prisoner of Azkaban") ?? new Book();
 
 			Order order = new Order()
 			{
-				User = userRepository.GetEntityById(penko) ?? new User(),
+				User = user,
+				Books =
+				{
+					book1,
+					book2
+				}
 			};
-			order.Books.Add(bookRepository.GetEntityById(potter1) ?? new Book());
-			order.Books.Add(bookRepository.GetEntityById(potter3) ?? new Book());
 
-			//Place an order
-			int orderId = orderRepository.Add(order);
+			int orderId = _orderRepository
+				.Add(order);
 
-            //Send message to user and staff
-			//Send message to order.user
-            Console.WriteLine($"Succefuly place an order with number: {orderId}");
+			_sender.SendSuccessfulOrder(staff, user, order);
 
-			//Staff message to staff
-			Console.WriteLine($"Added order with number {orderId} for fulfillment");
+			return order;
+		}
 
-			Thread.Sleep(3000);
+		public void SetData()
+		{
+			_userRepository.Add(new User() { Name = "Penko", Email = "penko@abv.bg", Role = Enums.Role.Customer, IsSubscribe = false });
+			_userRepository.Add(new User() { Name = "Stefan", Email = "stefan@gmail.com", Role = Enums.Role.Staff, IsSubscribe = false });
+			_userRepository.Add(new User() { Name = "Nikola", Email = "nikola@gmail.com", Role = Enums.Role.Staff, IsSubscribe = true });
+			_userRepository.Add(new User() { Name = "Ivan", Email = "ivan@abv.bg", Role = Enums.Role.Staff, IsSubscribe = true });
 
-            for (int i = 1; i <= 10; i++)
-            {
-				Console.Clear();
-                Console.WriteLine($"Loading: {i}0%/100%");
+			_bookRepository.Add(new Book() { Name = "Harry Potter and the Philosopher's Stone" });
+			_bookRepository.Add(new Book() { Name = "Harry Potter and the Chamber of Secrets" });
+			_bookRepository.Add(new Book() { Name = "Harry Potter and the Prisoner of Azkaban" });
+		}
+
+		private void Preparing(Order order, List<User> staff)
+		{
+			for (int i = 1; i <= 10; i += 2)
+			{
+				Console.WriteLine($"Preparing: {i}0%/100%");
 				Thread.Sleep(300);
-            }
+			}
 
-            //Send message to user
-            //order.user
-            Console.WriteLine($"Order is waiting for shipping with number: {orderId}");
-
-			//Send message to staff
-			Console.WriteLine($"Order with number: {orderId} is ready for shipping!");
-        }
+			order.IsReadyForShipping = true;
+			
+			_sender.SendOrderForShipping(staff, order.User, order);
+		}
 	}
 }
