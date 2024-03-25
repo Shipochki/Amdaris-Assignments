@@ -14,51 +14,35 @@ namespace Assignment_Clean_Code.SpeakerExtensions
 		{
 			try
 			{
-				IsValid(speaker);
-			}
-			catch (ArgumentException m)
-			{
-                Console.WriteLine(m.Message);
-				return null;
-			}
-
-			try
-			{
-				IsGood(speaker, data);
-			}
-			catch (SpeakerDoesntMeetRequirementsException m)
-			{
-                Console.WriteLine(m.Message);
-				return null;
-			}
-
-			try
-			{
-				ApprovingSessions(speaker, data);
-			}
-			catch (ArgumentException m)
-			{
-                Console.WriteLine(m.Message);
-				return null;
-			}
-			catch(NoSessionsApprovedException m)
-			{
-                Console.WriteLine(m.Message);
-				return null;
-            }
-
-			SetRegistrationFee(speaker);
-
-			try
-			{
+				IsValid(speaker); 
+				IsGood(speaker, data); 
+				ApprovingSessions(speaker, data); 
+				SetRegistrationFee(speaker); 
 				return repository.SaveSpeaker(speaker);
 			}
 			catch (ArgumentNullException m)
 			{
-                Console.WriteLine(m.Message);
+				Console.WriteLine(m.Message);
 				return null;
 			}
+			catch (ArgumentException m)
+			{
+				Console.WriteLine(m.Message);
+				return null;
+			}
+			catch (SpeakerDoesntMeetRequirementsException m)
+			{
+				Console.WriteLine(m.Message);
+				return null;
+			}
+			catch (NoSessionsApprovedException m)
+			{
+				Console.WriteLine(m.Message);
+				return null;
+			}
+
 		}
+
 
 		private static void SetRegistrationFee(Speaker speaker)
 		{
