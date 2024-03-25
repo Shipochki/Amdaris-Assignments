@@ -5,5 +5,7 @@
     public interface IRepository<T> where T : Entity
     {
         int SaveSpeaker(T speaker);
+
+        T? GetEntityById(int id);
     }
 }

@@ -18,11 +18,16 @@ namespace Assignment_Clean_Code.Repository
                 throw new ArgumentNullException("Invalid speaker");
             }
 
-            int newId = new Random().Next(1, 100);
+            int newId = new Random().Next(1, 10000000);
             speaker.Id = newId;
             _context.Entities.Add(speaker);
 
             return newId;
+        }
+
+        public T? GetEntityById(int id)
+        {
+            return _context.Entities.SingleOrDefault(e => e.Id == id);
         }
     }
 }

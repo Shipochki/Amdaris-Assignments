@@ -25,6 +25,15 @@ namespace Assignment_Clean_Code
 				Sessions = new List<Session> { new Session("OnSees", "CoolSes")}
 			};
 			speaker.Register(repository, data);
-		}
+
+			Speaker? result = repository.GetEntityById(speaker.Id);
+
+			if(result == null)
+			{
+                Console.WriteLine("Invalid speaker");
+            }
+
+            Console.WriteLine($"Successful created: {result.FirstName} {result.LastName}");
+        }
 	}
 }
