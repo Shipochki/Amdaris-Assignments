@@ -4,14 +4,14 @@
 
 	public static class UserExtensions
 	{
-		public static void Subscribe(this User user)
+		public static void Subscribe(this User user, Order order)
 		{
-			user.IsSubscribe = true;
+			user.SubscribedOrders.Add(order);
 		}
 
-		public static void UnSubscribe(this User user)
+		public static void UnSubscribe(this User user, Order order)
 		{
-			user.IsSubscribe = false;
+			user.SubscribedOrders.Remove(order);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 	{
 		public void SendSuccessfulOrder(List<User> staff, User customer, Order order)
 		{
-			if (customer.IsSubscribe == true)
+			if (customer.SubscribedOrders.Contains(order))
 			{
 				Console.WriteLine($"Hello, {customer.Name} thank you for your order with number: {order.Id}");
                 Console.WriteLine("Your ordered products:");
@@ -17,7 +17,7 @@
                 Console.WriteLine();
             }
 
-			foreach (var user in staff.Where(u => u.IsSubscribe == true))
+			foreach (var user in staff.Where(u => u.SubscribedOrders.Contains(order)))
 			{
 				Console.WriteLine($"StaffMessage - {user.Name} - New order with number: {order.Id}");
 				Console.WriteLine("Order products:");
@@ -31,12 +31,12 @@
 
 		public void SendOrderForShipping(List<User> staff, User customer, Order order)
 		{
-			if (customer.IsSubscribe == true)
+			if (customer.SubscribedOrders.Contains(order))
 			{
 				Console.WriteLine($"Hello, {customer.Name} your order with number: {order.Id} is ready for shipping!");
 			}
 
-			foreach (var user in staff.Where(u => u.IsSubscribe == true))
+			foreach (var user in staff.Where(u => u.SubscribedOrders.Contains(order)))
 			{
 				Console.WriteLine($"StaffMessage - {user.Name} - Order with number: {order.Id} is ready for Shipping!!!");
 			}

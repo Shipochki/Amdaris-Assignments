@@ -17,66 +17,52 @@
 			_orderRepository = new Repository<Order>(new DbContext<Order>());
 			_bookRepository = new Repository<Book>(new DbContext<Book>());
 			_sender = new MailSender();
+			SetData();
 		}
 
 		public void Run()
 		{
-			SetData();
-
-			//Subscribing
-			_userRepository
-				.GetAll()
-				.FirstOrDefault(u => u.Email == "penko@abv.bg")?
-				.Subscribe();
-
-			_userRepository
-				.GetAll()
-				.FirstOrDefault(u => u.Email == "stefan@gmail.com")?
-				.Subscribe();
-
-			//Unsubscribing
-			_userRepository
-				.GetAll()
-				.FirstOrDefault(u => u.Email == "nikola@gmail.com")?
-				.UnSubscribe();
-
 			List<User> staff = _userRepository
 							.GetAll()
 							.Where(u => u.Role.Equals(Enums.Role.Staff))
 							.ToList();
 
+			User user = _userRepository
+							.GetAll()
+							.FirstOrDefault(u => u.Email == "penko@abv.bg") ?? new User();
+
+			List<Book> books = _bookRepository.GetAll().Take(2).ToList();
+
 			//Place an order
-			Order order = PlaceAnOrder(staff);
+			Order order = PlaceAnOrder(staff, user, books);
+
+			//Unsubscribing
+			_userRepository
+				.GetAll()
+				.FirstOrDefault(u => u.Email == "nikola@gmail.com")?
+				.UnSubscribe(order);
 
 			Preparing(order, staff);
 		}
 
-		public Order PlaceAnOrder(List<User> staff)
+		public Order PlaceAnOrder(List<User> staff, User user, List<Book> books)
 		{
-			User user = _userRepository
-				.GetAll()
-				.FirstOrDefault(u => u.Email == "penko@abv.bg") ?? new User();
-
-			Book book1 = _bookRepository
-					.GetAll()
-					.FirstOrDefault(c => c.Name == "Harry Potter and the Philosopher's Stone") ?? new Book();
-
-			Book book2 = _bookRepository
-					.GetAll()
-					.FirstOrDefault(c => c.Name == "Harry Potter and the Prisoner of Azkaban") ?? new Book();
-
 			Order order = new Order()
 			{
 				User = user,
-				Books =
-				{
-					book1,
-					book2
-				}
+				Books = books
 			};
 
 			int orderId = _orderRepository
 				.Add(order);
+
+			//Subscribing
+			user.Subscribe(order);
+
+			foreach (var item in staff)
+			{
+				item.Subscribe(order);
+			}
 
 			_sender.SendSuccessfulOrder(staff, user, order);
 
@@ -85,10 +71,10 @@
 
 		public void SetData()
 		{
-			_userRepository.Add(new User() { Name = "Penko", Email = "penko@abv.bg", Role = Enums.Role.Customer, IsSubscribe = false });
-			_userRepository.Add(new User() { Name = "Stefan", Email = "stefan@gmail.com", Role = Enums.Role.Staff, IsSubscribe = false });
-			_userRepository.Add(new User() { Name = "Nikola", Email = "nikola@gmail.com", Role = Enums.Role.Staff, IsSubscribe = true });
-			_userRepository.Add(new User() { Name = "Ivan", Email = "ivan@abv.bg", Role = Enums.Role.Staff, IsSubscribe = true });
+			_userRepository.Add(new User() { Name = "Penko", Email = "penko@abv.bg", Role = Enums.Role.Customer });
+			_userRepository.Add(new User() { Name = "Stefan", Email = "stefan@gmail.com", Role = Enums.Role.Staff });
+			_userRepository.Add(new User() { Name = "Nikola", Email = "nikola@gmail.com", Role = Enums.Role.Staff });
+			_userRepository.Add(new User() { Name = "Ivan", Email = "ivan@abv.bg", Role = Enums.Role.Staff });
 
 			_bookRepository.Add(new Book() { Name = "Harry Potter and the Philosopher's Stone" });
 			_bookRepository.Add(new Book() { Name = "Harry Potter and the Chamber of Secrets" });
@@ -104,7 +90,7 @@
 			}
 
 			order.IsReadyForShipping = true;
-			
+
 			_sender.SendOrderForShipping(staff, order.User, order);
 		}
 	}
