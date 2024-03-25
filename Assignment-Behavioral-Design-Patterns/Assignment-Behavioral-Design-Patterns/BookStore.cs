@@ -53,7 +53,7 @@
 				Books = books
 			};
 
-			int orderId = _orderRepository
+			_orderRepository
 				.Add(order);
 
 			//Subscribing
