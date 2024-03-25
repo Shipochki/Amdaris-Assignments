@@ -6,7 +6,7 @@
     {
         T? GetEntityById(int id);
 
-        T? Add(T entity);
+        int Add(T entity);
 
         List<T> GetAll();
     }

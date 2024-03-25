@@ -12,7 +12,7 @@
 			_context = context;
 		}
 
-		public T? Add(T entity)
+		public int Add(T entity)
 		{
 			if (entity == null)
 			{
@@ -23,7 +23,7 @@
 			entity.Id = newId;
 
 			this._context.Entities.Add(entity);
-			return entity;
+			return newId;
 		}
 
 		public List<T> GetAll()
