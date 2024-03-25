@@ -59,12 +59,14 @@
 			//Subscribing
 			user.Subscribe(order);
 
-			foreach (var item in staff)
+			foreach (var userStaff in staff)
 			{
-				item.Subscribe(order);
+				userStaff.Subscribe(order);
 			}
 
 			_sender.SendSuccessfulOrder(staff, user, order);
+
+			order.Status = "Successfully created";
 
 			return order;
 		}
@@ -89,7 +91,7 @@
 				Thread.Sleep(300);
 			}
 
-			order.IsReadyForShipping = true;
+			order.Status = "Order is ready for shipping";
 
 			_sender.SendOrderForShipping(staff, order.User, order);
 		}

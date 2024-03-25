@@ -4,7 +4,6 @@
 	{
 		public User User { get; set; } = null!;
 		public List<Book> Books { get; set; } = new List<Book>();
-
-		public bool IsReadyForShipping { get; set; } = false;
+		public string Status { get; set; } = null!;
 	}
 }
