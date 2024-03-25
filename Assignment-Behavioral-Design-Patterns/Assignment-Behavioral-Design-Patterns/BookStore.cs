@@ -37,10 +37,10 @@
 			Order order = PlaceAnOrder(staff, user, books);
 
 			//Unsubscribing
-			_userRepository
+			User? nikola = _userRepository
 				.GetAll()
-				.FirstOrDefault(u => u.Email == "nikola@gmail.com")?
-				.UnSubscribe(order);
+				.FirstOrDefault(u => u.Email == "nikola@gmail.com");
+			UnSubscribe(nikola ?? new User(), order);
 
 			Preparing(order, staff);
 		}
@@ -57,11 +57,11 @@
 				.Add(order);
 
 			//Subscribing
-			user.Subscribe(order);
+			Subscribe(user, order);
 
 			foreach (var userStaff in staff)
 			{
-				userStaff.Subscribe(order);
+				Subscribe(userStaff, order);
 			}
 
 			_sender.SendSuccessfulOrder(staff, user, order);
@@ -94,6 +94,16 @@
 			order.Status = "Order is ready for shipping";
 
 			_sender.SendOrderForShipping(staff, order.User, order);
+		}
+
+		public void Subscribe(User user, Order order)
+		{
+			user.SubscribedOrders.Add(order);
+		}
+
+		public void UnSubscribe(User user, Order order)
+		{
+			user.SubscribedOrders.Remove(order);
 		}
 	}
 }
