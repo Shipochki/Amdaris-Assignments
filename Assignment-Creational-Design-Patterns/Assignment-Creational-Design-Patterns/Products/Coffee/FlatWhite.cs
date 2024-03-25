@@ -6,13 +6,13 @@
 	{
         public FlatWhite()
         {
-			AmountBlackCoffee = 2;
-			AmountSugar = 0;
+			BlackCoffee = 2;
+			CubesSugar = 0;
 			Milk = new List<IMilk>();
         }
 
-        public int AmountBlackCoffee { get; set; }
-		public int AmountSugar { get; set; }
+        public int BlackCoffee { get; set; }
+		public int CubesSugar { get; set; }
 		public List<IMilk> Milk { get; set; }
 	}
 }

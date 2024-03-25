@@ -34,7 +34,7 @@
 				throw new ArgumentException("Invalid Coffee");
 			}
 
-			coffee.AmountSugar += amountSugar;
+			coffee.CubesSugar += amountSugar;
 		}
 
 		public void MakeCoffee(ICoffee coffee)

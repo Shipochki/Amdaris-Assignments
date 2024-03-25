@@ -6,13 +6,13 @@
 	{
         public Espresso()
         {
-			AmountBlackCoffee = 1;
-			AmountSugar = 0;
+			BlackCoffee = 1;
+			CubesSugar = 0;
 			Milk = new List<IMilk>();
         }
 
-        public int AmountBlackCoffee { get; set; }
-		public int AmountSugar { get; set; }
+        public int BlackCoffee { get; set; }
+		public int CubesSugar { get; set; }
 		public List<IMilk> Milk { get; set; }
 	}
 }

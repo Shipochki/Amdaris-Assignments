@@ -4,9 +4,9 @@
 
     public interface ICoffee
     {
-        public int AmountBlackCoffee { get; set; }
+        public int BlackCoffee { get; set; }
 
-        public int AmountSugar { get; set; }
+        public int CubesSugar { get; set; }
 
         public List<IMilk> Milk { get; set; }
     }
