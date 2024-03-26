@@ -1,7 +1,6 @@
 ﻿namespace Assignment_Behavioral_Design_Patterns
 {
 	using Assignment_Behavioral_Design_Patterns.Entities;
-	using Assignment_Behavioral_Design_Patterns.Extensions;
 	using Assignment_Behavioral_Design_Patterns.Repository;
 
 	public class BookStore
@@ -45,7 +44,7 @@
 			Preparing(order, staff);
 		}
 
-		public Order PlaceAnOrder(List<User> staff, User user, List<Book> books)
+		private Order PlaceAnOrder(List<User> staff, User user, List<Book> books)
 		{
 			Order order = new Order()
 			{
@@ -71,7 +70,7 @@
 			return order;
 		}
 
-		public void SetData()
+		private void SetData()
 		{
 			_userRepository.Add(new User() { Name = "Penko", Email = "penko@abv.bg", Role = Enums.Role.Customer });
 			_userRepository.Add(new User() { Name = "Stefan", Email = "stefan@gmail.com", Role = Enums.Role.Staff });
@@ -96,12 +95,12 @@
 			_sender.SendOrderForShipping(staff, order.User, order);
 		}
 
-		public void Subscribe(User user, Order order)
+		private void Subscribe(User user, Order order)
 		{
 			user.SubscribedOrders.Add(order);
 		}
 
-		public void UnSubscribe(User user, Order order)
+		private void UnSubscribe(User user, Order order)
 		{
 			user.SubscribedOrders.Remove(order);
 		}
