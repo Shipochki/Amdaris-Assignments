@@ -6,40 +6,52 @@
 	{
 		public void SendSuccessfulOrder(List<User> staff, User customer, Order order)
 		{
-			if (customer.SubscribedOrders.Contains(order))
+			if (IsContainsOrder(customer, order))
 			{
-				Console.WriteLine($"Hello, {customer.Name} thank you for your order with number: {order.Id}");
-                Console.WriteLine("Your ordered products:");
-				foreach (Book book in order.Books)
-				{
-                    Console.WriteLine($" -- {book.Name}");
-                }
-                Console.WriteLine();
-            }
+				AddTextToMessage($"Hello, {customer.Name} thank you for your order with number: {order.Id}");
+				AddTextToMessage("Your ordered products:");
+				AddBooksToMessage(order.Books);
+				Console.WriteLine();
+			}
 
-			foreach (var user in staff.Where(u => u.SubscribedOrders.Contains(order)))
+			foreach (var user in staff.Where(u => IsContainsOrder(u, order)))
 			{
-				Console.WriteLine($"StaffMessage - {user.Name} - New order with number: {order.Id}");
-				Console.WriteLine("Order products:");
-				foreach (Book book in order.Books)
-				{
-					Console.WriteLine($" -- {book.Name}");
-				}
-                Console.WriteLine();
-            }
+				AddTextToMessage($"StaffMessage - {user.Name} - New order with number: {order.Id}");
+				AddTextToMessage("Order products:");
+				AddBooksToMessage(order.Books);
+				Console.WriteLine();
+			}
 		}
 
 		public void SendOrderForShipping(List<User> staff, User customer, Order order)
 		{
-			if (customer.SubscribedOrders.Contains(order))
+			if (IsContainsOrder(customer, order))
 			{
-				Console.WriteLine($"Hello, {customer.Name} your order with number: {order.Id} is ready for shipping!");
+				AddTextToMessage($"Hello, {customer.Name} your order with number: {order.Id} is ready for shipping!");
 			}
 
-			foreach (var user in staff.Where(u => u.SubscribedOrders.Contains(order)))
+			foreach (var user in staff.Where(u => IsContainsOrder(u, order)))
 			{
-				Console.WriteLine($"StaffMessage - {user.Name} - Order with number: {order.Id} is ready for Shipping!!!");
+				AddTextToMessage($"StaffMessage - {user.Name} - Order with number: {order.Id} is ready for Shipping!!!");
 			}
 		}
+
+		private bool IsContainsOrder(User user, Order order)
+		{
+			return user.SubscribedOrders.Contains(order);
+		}
+
+		private void AddBooksToMessage(List<Book> books)
+		{
+			foreach (Book book in books)
+			{
+				Console.WriteLine($" -- {book.Name}");
+			}
+		}
+
+		private void AddTextToMessage(string text)
+		{
+            Console.WriteLine(text);
+        }
 	}
 }

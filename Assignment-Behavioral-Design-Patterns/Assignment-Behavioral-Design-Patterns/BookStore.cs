@@ -103,6 +103,7 @@
 		private void UnSubscribe(User user, Order order)
 		{
 			user.SubscribedOrders.Remove(order);
-		}
+            Console.WriteLine($"{user.Name} unsubcribe to order: {order.Id}");
+        }
 	}
 }
