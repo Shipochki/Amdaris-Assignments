@@ -17,29 +17,36 @@
 				Console.WriteLine("- Italic");
 				Console.WriteLine("- Color");
 				Console.WriteLine("- Bold");
-				Console.WriteLine("- Done");
 
 				string command = Console.ReadLine() ?? string.Empty;
 				command = command.ToLower();
 
-				if (command == "done") break;
-				else if (command == "color")
+				if (command == "color")
 				{
 					Console.WriteLine("Write color:");
 					color = Console.ReadLine() ?? string.Empty;
 				}
-				commands.Add(command);
-				Console.WriteLine($"Successful added {command}");
+
+				if (!commands.Contains(command) && (command == "underline" || command == "bold" || command == "color" || command == "italic"))
+				{
+					commands.Add(command);
+					Console.WriteLine($"Successful added {command}");
+				}
+
+				Console.WriteLine();
+				Console.WriteLine("Done? (y/n)");
+				if (Console.ReadLine() == "y") break;
 				Console.WriteLine();
 			}
 
-			Console.WriteLine("Do you want to see added formating to the text: (y/n)");
+			Console.WriteLine();
+			Console.WriteLine("Do you want to see added formats to the text: (y/n)");
 			string input = Console.ReadLine() ?? string.Empty;
 			if (input == "y")
 			{
 				while (true)
 				{
-					Console.WriteLine($"Formatts: {string.Join(", ", commands)}");
+					Console.WriteLine($"Formats: {string.Join(", ", commands)}");
 
 					Console.WriteLine("Do you want to delete format? (y/n)");
 					string command = Console.ReadLine() ?? string.Empty;
@@ -48,28 +55,22 @@
 						Console.WriteLine();
 						while (true)
 						{
-							Console.WriteLine("Write format for deleting");
+							Console.WriteLine("Write format for deleting:");
 							command = Console.ReadLine() ?? string.Empty;
 							if (commands.Contains(command))
 							{
 								commands.Remove(command);
 							}
 
+							Console.WriteLine();
 							Console.WriteLine("Done with deleting? (y/n)");
-							command = Console.ReadLine() ?? string.Empty;
-							if (command == "y")
-							{
-								break;
-							}
+							if (Console.ReadLine() == "y") break;
 						}
 					}
 
+					Console.WriteLine();
 					Console.WriteLine("Done with formats? (y/n)");
-					input = Console.ReadLine() ?? string.Empty;
-					if (input == "y")
-					{
-						break;
-					}
+					if (Console.ReadLine() == "y") break;
 				}
 			}
 
@@ -93,6 +94,7 @@
 				}
 			}
 
+			Console.WriteLine();
 			Console.WriteLine(text.GetText());
 		}
 	}
