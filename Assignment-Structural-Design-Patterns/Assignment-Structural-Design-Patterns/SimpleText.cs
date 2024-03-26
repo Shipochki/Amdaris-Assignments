@@ -2,9 +2,15 @@
 {
 	public class SimpleText : IText
 	{
-		public string GetText()
+		private string _text;
+        public SimpleText(string text)
+        {
+            _text = text;
+        }
+
+        public string GetText()
 		{
-			return "This is simple text";
+			return $"This is \"{_text}\" with:";
 		}
 	}
 }

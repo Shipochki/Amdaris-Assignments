@@ -8,7 +8,7 @@
 
         public override string GetText()
 		{
-			return $"{_text.GetText()} with bold";
+			return $"{_text.GetText()} bold,";
 		}
 	}
 }

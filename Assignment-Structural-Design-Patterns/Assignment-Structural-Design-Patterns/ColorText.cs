@@ -2,13 +2,16 @@
 {
 	public class ColorText : BaseTextDecoder
 	{
-        public ColorText(IText text) : base(text) 
-		{ 
+		private string _color;
+
+        public ColorText(IText text, string color) : base(text) 
+		{
+			_color = color;
 		}
 
         public override string GetText()
 		{
-			return $"{_text.GetText()} with color";
+			return $"{_text.GetText()} color: {_color},";
 		}
 	}
 }

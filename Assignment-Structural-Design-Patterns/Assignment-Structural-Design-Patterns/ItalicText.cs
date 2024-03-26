@@ -8,7 +8,7 @@
 
         public override string GetText()
 		{
-			return $"{_text.GetText()} with italic";
+			return $"{_text.GetText()} italic,";
 		}
 	}
 }
