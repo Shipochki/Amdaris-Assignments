@@ -12,7 +12,7 @@
 
 			while (true)
 			{
-				Console.WriteLine("Add formatting:");
+				Console.WriteLine("Add format:");
 				Console.WriteLine("- Underline");
 				Console.WriteLine("- Italic");
 				Console.WriteLine("- Color");
@@ -48,7 +48,8 @@
 				{
 					Console.WriteLine($"Formats: {string.Join(", ", commands)}");
 
-					Console.WriteLine("Do you want to delete format? (y/n)");
+                    Console.WriteLine();
+                    Console.WriteLine("Do you want to delete format? (y/n)");
 					string command = Console.ReadLine() ?? string.Empty;
 					if (command == "y")
 					{
@@ -65,13 +66,15 @@
 							Console.WriteLine();
 							Console.WriteLine("Done with deleting? (y/n)");
 							if (Console.ReadLine() == "y") break;
-						}
+                            Console.WriteLine();
+                        }
 					}
 
 					Console.WriteLine();
 					Console.WriteLine("Done with formats? (y/n)");
 					if (Console.ReadLine() == "y") break;
-				}
+                    Console.WriteLine();
+                }
 			}
 
 			foreach (var command in commands)
