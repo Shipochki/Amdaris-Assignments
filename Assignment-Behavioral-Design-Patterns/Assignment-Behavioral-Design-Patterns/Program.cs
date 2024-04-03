@@ -4,6 +4,7 @@
 	{
 		static void Main(string[] args)
 		{
+			//Observer pattern
 			BookStore bookStore = new BookStore();
 			bookStore.Run();
 		}
