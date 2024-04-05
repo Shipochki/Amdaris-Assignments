@@ -27,7 +27,7 @@ WHERE [PP].[BusinessEntityID] =
 	)
 
 --3
---Get sales person with biggest bonus in the table
+--Get sales person with biggest bonus
 SELECT
 	[SSP].[BusinessEntityID]
 	,[SSP].[Bonus]
@@ -43,7 +43,7 @@ WHERE [SSP].[BusinessEntityID] =
 	)
 
 --4
---Get all countries with country code and name with currency code EUR
+--Get all countries: country code and name with currency code EUR
 SELECT
 	[SCRC].[CountryRegionCode]
 	,(
@@ -123,7 +123,7 @@ WHERE [SC].[PersonID] IN
 GROUP BY [SC].[TerritoryID]
 
 --8
---Update bonuses for salses person which territory is not in north america 
+--Update bonuses for salses person whose territory is not in north america 
 SELECT *
 FROM [Sales].[SalesPerson] AS [SSP]
 WHERE [SSP].[TerritoryID] NOT IN

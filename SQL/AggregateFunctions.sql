@@ -36,16 +36,35 @@ ORDER BY(MAX([SSP].[Bonus])) DESC
 
 --4
 --Get all account numbers with stores starts wtih N
+SELECT *
+FROM [Sales].[Store]
+
 SELECT 
-	[SC].[AccountNumber]
-	,[SS].[Name] AS [StoreName]
+	*
 FROM [Sales].[Customer] AS [SC]
-JOIN [Sales].[Store] AS [SS] ON [SC].[StoreID] = [SS].[BusinessEntityID]
-WHERE [SC].[PersonID] IS NOT NULL AND [SS].[Name] LIKE 'N%'
-ORDER BY [SS].[Name]
+FULL JOIN [Sales].[Store] AS [SS] ON [SC].[StoreID] = [SS].[BusinessEntityID]
+WHERE [SS].[Name] LIKE 'N%'
+ORDER BY [SS].[BusinessEntityID] DESC
+
+SELECT (
+(SELECT COUNT(*)
+FROM [Sales].[Customer] AS [SC]
+RIGHT JOIN [Person].[Person] AS [PP] ON [SC].[PersonID] = [PP].[BusinessEntityID])
+-
+(SELECT COUNT(*)
+FROM [Sales].[Customer] AS [SC]
+LEFT JOIN [Person].[Person] AS [PP] ON [SC].[PersonID] = [PP].[BusinessEntityID])
+)
+
+SELECT 
+	(COUNT([PP].[BusinessEntityID])
+	-
+	COUNT([SC].[CustomerID]))
+FROM [Sales].[Customer] AS [SC]
+FULL JOIN [Person].[Person] AS [PP] ON [SC].[PersonID] = [PP].[BusinessEntityID]
 
 --5
---Get all country region average rate with to currency code equal to eur
+--Get all country region average rate with currency code equal to eur
 SELECT
 	[SCRC].[CountryRegionCode]
 	,[SCR].[FromCurrencyCode]
