@@ -1,13 +1,17 @@
 ﻿namespace Assignment_Behavioral_Design_Patterns.Entities
 {
-	using Assignment_Behavioral_Design_Patterns.Enums;
-	using Assignment_Behavioral_Design_Patterns.Mediator;
+    using Assignment_Behavioral_Design_Patterns.AbstractsAndInterfaces;
+    using Assignment_Behavioral_Design_Patterns.Enums;
+    using Assignment_Behavioral_Design_Patterns.Mediator;
+    using Assignment_Behavioral_Design_Patterns.Requests;
 
-	public class User : ISubscriber<Order>
+    public class User : ISubscriber<Order>
 	{
 		public required string Name { get; set; }
 
 		public Role Role { get; set; }
+
+		public bool IsSubscribed { get; set; }
 
 		public void Notify(Order item)
 		{
