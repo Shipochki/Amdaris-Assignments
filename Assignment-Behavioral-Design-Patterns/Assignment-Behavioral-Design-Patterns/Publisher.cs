@@ -2,7 +2,7 @@
 {
 	using Assignment_Behavioral_Design_Patterns.Entities;
 
-	public class BookStore : AbstractPublisher<Order>
+	public class Publisher : AbstractPublisher<Order>
 	{
 	}
 }

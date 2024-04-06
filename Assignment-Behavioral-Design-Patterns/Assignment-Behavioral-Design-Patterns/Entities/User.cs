@@ -5,7 +5,7 @@
 
 	public class User : ISubscriber<Order>
 	{
-        public required string Name { get; set; }
+		public required string Name { get; set; }
 
 		public Role Role { get; set; }
 
@@ -13,15 +13,32 @@
 		{
 			Mediator mediator = new Mediator();
 			mediator.RegisterHandler(typeof(MessageRequest), new MessageRequestHandler());
+			string message = string.Empty;
 
-			if(Role == Role.Client)
+			if (item.Status == Status.Created)
 			{
-				//Mediator send to client
+				if (Role == Role.Client)
+				{
+					message = $"Successful created order from {Name}";
+				}
+				else
+				{
+					message = $"{Name} {Role} - new order is added to the store";
+				}
 			}
-			else
+			else if (item.Status == Status.ReadyForShipping)
 			{
-				//Mediator send to staff
+				if (Role == Role.Client)
+				{
+					message = $"{Name} - Your order is waiting for shipping";
+				}
+				else
+				{
+					message = $"{Name} {Role} - The order is ready for shipping";
+				}
 			}
+
+			mediator.Send(new MessageRequest(message));
 		}
 	}
 }

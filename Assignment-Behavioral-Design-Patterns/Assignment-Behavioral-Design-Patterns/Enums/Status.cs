@@ -3,6 +3,6 @@
 	public enum Status
 	{
 		Created = 0,
-
+		ReadyForShipping = 1
 	}
 }

@@ -1,4 +1,11 @@
 ﻿namespace Assignment_Behavioral_Design_Patterns.Entities
 {
-	public record class Order(List<Book> books);
+	using Assignment_Behavioral_Design_Patterns.Enums;
+
+	public class Order()
+	{
+        public List<Book> Books { get; set; } = new List<Book>();
+
+		public Status Status { get; set; }
+    };
 }
