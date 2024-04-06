@@ -29,6 +29,10 @@
 				{
 					message = $"{Name} {Role} - new order is added to the store";
 				}
+				else
+				{
+					return;
+				}
 			}
 			else if (item.Status == Status.ReadyForShipping)
 			{
@@ -40,6 +44,14 @@
 				{
 					message = $"{Name} {Role} - The order is ready for shipping";
 				}
+                else
+                {
+					return;
+                }
+            }
+			else
+			{
+				return;
 			}
 
 			mediator.Send(new MessageRequest(message));

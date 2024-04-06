@@ -1,8 +1,8 @@
-﻿using Assignment_Behavioral_Design_Patterns.Entities;
-using Assignment_Behavioral_Design_Patterns.Enums;
-
-namespace Assignment_Behavioral_Design_Patterns
+﻿namespace Assignment_Behavioral_Design_Patterns
 {
+	using Assignment_Behavioral_Design_Patterns.Entities;
+	using Assignment_Behavioral_Design_Patterns.Enums;
+
 	public class BookStore
 	{
 		private Publisher _publisher;
