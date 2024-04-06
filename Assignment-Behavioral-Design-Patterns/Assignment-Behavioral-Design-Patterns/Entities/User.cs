@@ -25,7 +25,7 @@
 				{
 					message = $"Successful created order from {Name}";
 				}
-				else
+				else if(Role == Role.Staff)
 				{
 					message = $"{Name} {Role} - new order is added to the store";
 				}
@@ -36,7 +36,7 @@
 				{
 					message = $"{Name} - Your order is waiting for shipping";
 				}
-				else
+				else if(Role == Role.Staff)
 				{
 					message = $"{Name} {Role} - The order is ready for shipping";
 				}

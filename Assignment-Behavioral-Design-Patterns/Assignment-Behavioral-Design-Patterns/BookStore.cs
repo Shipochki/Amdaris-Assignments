@@ -29,7 +29,6 @@ namespace Assignment_Behavioral_Design_Patterns
 		public void CreateOrder(List<Book> books, User client)
 		{
 			_publisher.AddSubscriber(client);
-
 			User? staff = _staff.FirstOrDefault(s => !_publisher.IsSubscribed(s));
 
 			_publisher.AddSubscriber(staff);
