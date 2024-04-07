@@ -8,7 +8,7 @@
     {
         public void Handle(MessageRequest request)
         {
-            Console.WriteLine($"Sending message: {request.message}");
+            Console.WriteLine($"Message: {request.message}");
         }
     }
 }
